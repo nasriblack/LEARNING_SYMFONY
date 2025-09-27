@@ -33,7 +33,7 @@ php bin/console make:entity
 - Make the migration Then migrate the Database
 ```
 # Make the migration ( create the sql code )
-php bin/console make:migratio
+php bin/console make:migration
 # Migrate the schema into the DB
 php bin/console doctrine:migrations:migrate
 ```
@@ -69,6 +69,12 @@ php bin/console make:controller
 composer require symfony/serializer-pack
 
 ```
+
+- To make the relation between 2 table , 
+1. Create an entity 
+1. add the type of the field as **relation** 
+1. Select the type of the relation  
+
 ## Notes
 
 - Symfony is using the annotations a lots !
