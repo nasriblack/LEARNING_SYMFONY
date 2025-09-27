@@ -2,26 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    #[Groups(["getBooks"])]
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["getBooks"])]
+    private $title;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $coverText = null;
+    #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(["getBooks"])]
+    private $coverText;
 
-    #[ORM\ManyToOne(inversedBy: 'books')]
-    private ?Author $author = null;
+    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'Books')]
+    #[Groups(["getBooks"])]
+    private $author;
+
 
     public function getId(): ?int
     {

@@ -87,6 +87,11 @@ composer require symfony/serializer-pack
 ## Errors & Solutions
 
 - If you get a empty object in the response => install the serialzer package or import it 
+- when getting this error 
+A circular reference has been detected when serializing the object of class "App\Entity\Book" (configured limit: 1). => you will give a groups name ! for the att you want to receive!
+=> the prb is the like an infinity loop of call ! 
+**#[Groups(["getBooks"])]** => you will call this by adding this in serializer arg **['groups' => 'getBooks']**
+
 
 ## Tips & Tricks
 
