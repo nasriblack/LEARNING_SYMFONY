@@ -57,15 +57,41 @@ for ($i = 0; $i < 20; $i++) {
 php bin\console doctrine:fixture:load
 ```
 
+- Make Controller
+```
+# This command will genere a controller , give the name of controller after in terminal
+php bin/console make:controller
+
+```
+
+- To retrieve data from the DB you need to install first the sertializer package
+```
+composer require symfony/serializer-pack
+
+```
 ## Notes
 
 - Symfony is using the annotations a lots !
 - **Fixture** => make a faker data
 
+
+
 ## References & Learning Resources
 
 ## Errors & Solutions
 
+- If you get a empty object in the response => install the serialzer package or import it 
+
 ## Tips & Tricks
+
+- To debug the router and see all router
+```
+php bin/console debug:router
+```
+- To clear the cache 
+```
+php bin/console cache:clear
+```
+
 
 ## Prgoress & Task
