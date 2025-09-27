@@ -75,6 +75,14 @@ composer require symfony/serializer-pack
 1. add the type of the field as **relation** 
 1. Select the type of the relation  
 
+- To make an **ExceptionSubscriber** you need to run this command , subscriber ( from the tasks he do he will subscribe to every exception we have!)
+```
+php bin/console make:subscriber
+
+```
+1. We need ExceptionSubscriber as an event
+1. We need to set the kernel.exception
+
 ## Notes
 
 - Symfony is using the annotations a lots !
@@ -110,5 +118,9 @@ php bin/console debug:router
 php bin/console cache:clear
 ```
 
+
+**DEBUG TOOLS**
+- dd() => stop execution
+- dump() => not stoping from the execution
 
 ## Prgoress & Task
