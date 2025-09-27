@@ -16,7 +16,7 @@ class Author
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lasrName = null;
+    private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstName = null;
@@ -37,14 +37,14 @@ class Author
         return $this->id;
     }
 
-    public function getLasrName(): ?string
+    public function getLastName(): ?string
     {
-        return $this->lasrName;
+        return $this->lastName;
     }
 
-    public function setLasrName(string $lasrName): static
+    public function setLastName(string $lastName): static
     {
-        $this->lasrName = $lasrName;
+        $this->lastName = $lastName;
 
         return $this;
     }
