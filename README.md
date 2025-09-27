@@ -98,6 +98,16 @@ php bin/console make:subscriber
 
 ## References & Learning Resources
 
+- https://openclassrooms.com/fr/courses/7709361-construisez-une-api-rest-avec-symfony-1/7795134-gerez-les-erreurs-et-ajoutez-la-validation => Tutorial iam watching
+
+- https://www.youtube.com/watch?v=3K6oBiQK8aA => Symfony in 12h
+
+- https://www.youtube.com/watch?v=TOa7JGbRwvk&list=PLQH1-k79HB3-xsVANTUV3yH6g9ubo_OxJ => TDD symfony
+
+- https://www.youtube.com/watch?v=t81jwwMCwRU&list=PLQH1-k79HB38sxQrZ7OWalANJchHrP3AQ => Doctrine Relationships
+
+- https://www.youtube.com/watch?v=pZv93AEJhS8&list=PLQH1-k79HB3_lsClhpW1svbukj6zgcupR => Microservice symfony 
+
 ## Errors & Solutions
 
 - If you get a empty object in the response => install the serialzer package or import it 
@@ -124,3 +134,10 @@ php bin/console cache:clear
 - dump() => not stoping from the execution
 
 ## Prgoress & Task
+
+- [ ] Understand the basics of symfony
+    - [ ] Entity
+    - [ ] Controller
+    - [ ] Migration and Database
+    - [ ] Repository and making custom request
+    - [ ] Exception
