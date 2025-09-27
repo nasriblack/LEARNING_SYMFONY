@@ -80,6 +80,8 @@ composer require symfony/serializer-pack
 - Symfony is using the annotations a lots !
 - **Fixture** => make a faker data
 - EntityManagerInterface : is the service we use to talk to the database in Doctrine, it's responsible for the CRUD => we are using with the Dependecy injection
+- ```return new JsonResponse($jsonBook, Response::HTTP_OK, [], true);``` => this represent a jsonResponse the empty array is for the header !
+
 
 
 
