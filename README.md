@@ -142,7 +142,15 @@ composer require lexik/jwt-authentication-bundle
 ```
 php bin/console lexik:jwt:generate-keypair
 ```
-3. The JWT_PASSPHRASE you will find it in .env file ! => this one to make our key 
+3. The JWT_PASSPHRASE you will find it in .env file ! => this one to make our key **sensitive value**
+4. You need to make update in the **config\packages\security.yaml** file !!
+5. Add this to the routes.yaml
+```yaml
+# config/routes.yaml
+api_login_check:
+    path: /api/login_check
+
+```
 
 
 
