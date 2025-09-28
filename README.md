@@ -83,6 +83,28 @@ php bin/console make:subscriber
 1. We need ExceptionSubscriber as an event
 1. We need to set the kernel.exception
 
+
+- Assets and validation
+    - Install the package
+```
+composer require symfony/validator doctrine/annotations
+
+```
+    - Import the right use
+```
+use Symfony\Component\Validator\Constraints as Assert;
+```
+    - In controller you need to 
+        - import **ValidatorInterface $validator** => make it DI in the params of the method 
+        - $errors = $validator->validate($book); => we gonna check if there is any error basic of the entity we updatet
+ 
+        ```php        
+        if ($errors->count() > 0) {
+            return new JsonResponse($serializer->serialize($errors, 'json'), JsonResponse::HTTP_BAD_REQUEST, [], true);
+        }
+        ```
+
+
 ## Notes
 
 - Symfony is using the annotations a lots !
