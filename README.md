@@ -165,11 +165,11 @@ php bin/console cache:clear
 ## Prgoress & Task
 
 - [ ] Understand the basics of symfony
-    - [ ] Entity
-    - [ ] Controller
+    - [X] Entity
+    - [X] Controller
     - [ ] Migration and Database
     - [ ] Repository and making custom request
-    - [ ] Exception
-    - [ ] Add conditions to the entity ( asserts )
+    - [X] Exception
+    - [X] Add conditions to the entity ( asserts )
     - [ ] Add listener
     - [ ] Understand the Firewall
