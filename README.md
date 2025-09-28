@@ -150,3 +150,4 @@ php bin/console cache:clear
     - [ ] Exception
     - [ ] Add conditions to the entity ( asserts )
     - [ ] Add listener
+    - [ ] Understand the Firewall
