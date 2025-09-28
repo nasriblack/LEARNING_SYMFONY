@@ -105,6 +105,32 @@ use Symfony\Component\Validator\Constraints as Assert;
         ```
 
 
+- Security and Authentification
+1. You need to install the security package
+```
+composer require security
+```
+2. You need to create a user 
+```
+php bin\console make:user
+```
+3. We need to add this getUserName method in the user entity
+```
+public function getUsername(): string {
+        return $this->getUserIdentifier();
+    }
+```
+4. As we update the entity file we need to make this , This will make the migration without creating a migratio file ! it update the database
+```
+php bin/console doctrine:schema:update --force
+```
+5. In Fixture , You need to inject the  UserPasswordHasherInterface $userPasswordHasher !
+    - After we set the email and role the password must be like this
+    ```php
+            $userAdmin->setPassword($this->userPasswordHasher->hashPassword($userAdmin, "password"));
+
+    ```
+
 ## Notes
 
 - Symfony is using the annotations a lots !
@@ -173,3 +199,4 @@ php bin/console cache:clear
     - [X] Add conditions to the entity ( asserts )
     - [ ] Add listener
     - [ ] Understand the Firewall
+    - [ ] Security
