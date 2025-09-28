@@ -92,7 +92,14 @@ php bin/console make:subscriber
 
 - ```$book = $serializer->deserialize($request->getContent(), Book::class, 'json');``` => to deserialize an object you need to get this from the serializer object , you just need to take the content from the request ( body ) , desiriaze it based on the class you need , with json.
 
-- ```[AbstractNormalizer::OBJECT_TO_POPULATE => $currentBook]``` => this will tell Symfony you need to update not making a new object 
+- ```[AbstractNormalizer::OBJECT_TO_POPULATE => $currentBook]``` => this will tell Symfony you need to update not making a new object
+
+- The listener are implemented when we want to make an event listeners for example to User entity ! We want for example when we change or affect User an listener should be trigger
+    - first you should update the the **service.yml** that exist in config folder
+    - add a listner in same ligne as App\ => you note this App\EntityListener for example
+    - In **resource** you should give the path of where this listenere exist
+    - In **tags** it's array
+    - In the Entity you make this #[ORM\EntityListener[(' Path of the file you write the class of the listener which get called)]]
 
 
 
@@ -142,3 +149,4 @@ php bin/console cache:clear
     - [ ] Repository and making custom request
     - [ ] Exception
     - [ ] Add conditions to the entity ( asserts )
+    - [ ] Add listener
