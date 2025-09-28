@@ -152,6 +152,14 @@ api_login_check:
 
 ```
 
+- To work with **role based**
+1. you need to add this above the method of the controller 
+```
+    #[IsGranted('ROLE_ADMIN', message: 'A custom msg in case of SIMPLE_ROLE')]
+
+```
+=> This will check the role of the user based on the token !! 
+
 
 
 
