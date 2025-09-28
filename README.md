@@ -141,3 +141,4 @@ php bin/console cache:clear
     - [ ] Migration and Database
     - [ ] Repository and making custom request
     - [ ] Exception
+    - [ ] Add conditions to the entity ( asserts )
