@@ -131,6 +131,22 @@ php bin/console doctrine:schema:update --force
 
     ```
 
+
+- To Active the JWT you need to
+1. install this package
+```
+composer require lexik/jwt-authentication-bundle
+```
+
+2. Generate private and public key
+```
+php bin/console lexik:jwt:generate-keypair
+```
+3. The JWT_PASSPHRASE you will find it in .env file ! => this one to make our key 
+
+
+
+
 ## Notes
 
 - Symfony is using the annotations a lots !
@@ -149,6 +165,8 @@ php bin/console doctrine:schema:update --force
     - In **tags** it's array
     - In the Entity you make this #[ORM\EntityListener[(' Path of the file you write the class of the listener which get called)]]
 
+
+- For the JWT we gonna use this package **LexikJWT**
 
 
 ## References & Learning Resources
