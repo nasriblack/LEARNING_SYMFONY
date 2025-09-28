@@ -226,3 +226,5 @@ php bin/console cache:clear
     - [ ] Add listener
     - [ ] Understand the Firewall
     - [ ] Security
+        - [X] Authentification
+        - [ ] Role based
