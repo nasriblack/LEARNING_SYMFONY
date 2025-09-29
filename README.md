@@ -184,6 +184,20 @@ api_login_check:
 
 - For the JWT we gonna use this package **LexikJWT**
 
+- The __invoke lets you call an object like a function!
+  ```
+  class HelloWorld {
+    public function __invoke($name) {
+        return "Hello, $name!";
+    }
+}
+
+$greeter = new HelloWorld();
+echo $greeter("Nasereddine"); 
+// Output: Hello, Nasereddine!
+```
+=> here we don't passe the arg in costructor because there is no constructor ! there is invook function
+
 
 ## References & Learning Resources
 
