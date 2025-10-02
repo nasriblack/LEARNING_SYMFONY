@@ -256,6 +256,42 @@ echo $greeter("Nasereddine");
     ```
     - In this way we can set the invalide cache of booksCache
 
+
+- SWAGGER => NelmioApiDocBandle
+    - you need to install this first 
+    ```
+    composer require nelmio/api-doc-bundle
+    composer require twig asset
+    ```
+    - Then you need to update the doc that exist in the config/route
+    ```yaml
+        # config\routes\nelmio_api_doc.yaml
+
+    # Expose your documentation as JSON swagger compliant
+    app.swagger:
+        path: /api/doc.json
+        methods: GET
+        defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+    
+    ## Requires the Asset component and the Twig bundle
+    ## $ composer require twig asset
+    app.swagger_ui:
+        path: /api/doc
+        methods: GET
+        defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+    ```
+
+    - You need to put this to acces_control in security yaml because it must be public access
+    ```yaml
+        - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+    ```
+
+    - Check in this project this file for the configuration you need to make the login and take the JWT
+    ```
+     config\packages\nelmio_api_doc.yaml
+    ```
+
 ## References & Learning Resources
 
 - https://openclassrooms.com/fr/courses/7709361-construisez-une-api-rest-avec-symfony-1/7795134-gerez-les-erreurs-et-ajoutez-la-validation => Tutorial iam watching

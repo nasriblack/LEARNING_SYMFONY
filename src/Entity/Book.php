@@ -34,7 +34,6 @@ class Book
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(["getBooks"])]
-    #[Since("1.0")]
 
     private ?string $comment = null;
 
