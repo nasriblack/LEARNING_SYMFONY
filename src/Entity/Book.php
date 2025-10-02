@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
+use JMS\Serializer\Annotation\Since;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,6 +31,12 @@ class Book
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'Books')]
     #[Groups(["getBooks"])]
     private $author;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(["getBooks"])]
+    #[Since("1.0")]
+
+    private ?string $comment = null;
 
 
     public function getId(): ?int
@@ -68,6 +76,18 @@ class Book
     public function setAuthor(?Author $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }

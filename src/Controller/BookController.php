@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
+use App\Service\VersioningService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,19 +28,30 @@ final class BookController extends AbstractController
         BookRepository $bookRepository,
         SerializerInterface $serializer,
         Request $request,
-        TagAwareCacheInterface $cache
+        TagAwareCacheInterface $cache,
+        VersioningService $versioningService
     ): JsonResponse {
+
+
+        $version = $versioningService->getVersion();
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 3);
 
         $idCache = "getAllBooks-" . $page . "-" . $limit;
 
-        $jsonBookList = $cache->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit, $serializer) {
-            $item->tag("booksCache");
-            $bookList = $bookRepository->findAllWithPagination($page, $limit);
-            return $serializer->serialize($bookList, 'json', ['groups' => 'getBooks']);
-        });
+        $jsonBookList = $cache->get(
+            $idCache,
+            function (ItemInterface $item) use ($bookRepository, $page, $limit, $serializer, $version) {
+                $item->tag("booksCache");
+                $bookList = $bookRepository->findAllWithPagination($page, $limit);
+                return $serializer->serialize(
+                    $bookList,
+                    'json',
+                    ['groups' => 'getBooks', 'version' => $version]
+                );
+            }
+        );
 
         return new JsonResponse($jsonBookList, Response::HTTP_OK, [], true);
     }
