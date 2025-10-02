@@ -6,10 +6,12 @@ use App\Entity\Book;
 use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -20,15 +22,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class BookController extends AbstractController
 {
-    #[Route('/api/books', name: 'book', methods: ['GET'])]
-    public function getBookList(
+    #[Route('/api/books', name: 'books', methods: ['GET'])]
+    public function getAllBooks(
         BookRepository $bookRepository,
         SerializerInterface $serializer,
         Request $request,
+        TagAwareCacheInterface $cachePool
     ): JsonResponse {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 3);
-        $bookList = $bookRepository->findAllWithPagination($page, $limit);
+
+        $idCache = "getAllBooks-" . $page . "-" . $limit;
+        $bookList = $cachePool->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit) {
+            $item->tag("booksCache");
+            return $bookRepository->findAllWithPagination($page, $limit);
+        });
+
         $jsonBookList = $serializer->serialize($bookList, 'json', ['groups' => 'getBooks']);
         return new JsonResponse($jsonBookList, Response::HTTP_OK, [], true);
     }

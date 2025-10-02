@@ -219,9 +219,18 @@ echo $greeter("Nasereddine");
     ```
     - We call the method we created in findAllWithPagination in our controller in place of findAll
     - We retreive the value first of the page and limit to passe it in the repo
-    
 
-
+- **CACHE**
+    - We gonna implmeent the cache inside getAllBooks and the theory is to make an id of each cache ! for example we gonna make an in for the request based on the page and limit like this 
+    ```php
+            $idCache = "getAllBooks-" . $page . "-" . $limit;
+            $bookList = $cachePool->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit) {
+            $item->tag("booksCache");
+            return $bookRepository->findAllWithPagination($page, $limit);
+        });
+    ```
+    - Here we are making a cache and after we getting the cache if it found of couse !
+    - We will return the $bookList of course !
 
 ## References & Learning Resources
 
