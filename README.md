@@ -161,6 +161,12 @@ api_login_check:
 => This will check the role of the user based on the token !! 
 
 
+- Start the project with Symfony CLI
+```
+symfony server:start
+```
+
+
 
 
 ## Notes
@@ -195,8 +201,26 @@ api_login_check:
 $greeter = new HelloWorld();
 echo $greeter("Nasereddine"); 
 // Output: Hello, Nasereddine!
-```
+    ```
 => here we don't passe the arg in costructor because there is no constructor ! there is invook function
+
+
+- **PAGINATION**
+    - First we gonna make the pagionation we need to update the repostory first and add this query 
+    ```php
+    public function findAllWithPagination($page, $limit)
+        {
+            $qb = $this->createQueryBuilder('b')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit);
+            return $qb->getQuery()->getResult();
+        }
+
+    ```
+    - We call the method we created in findAllWithPagination in our controller in place of findAll
+    - We retreive the value first of the page and limit to passe it in the repo
+    
+
 
 
 ## References & Learning Resources
