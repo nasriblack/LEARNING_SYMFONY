@@ -249,6 +249,13 @@ echo $greeter("Nasereddine");
 
     **YOU NEED TO CLEAR THE CACHE**
 
+    - What if we delete an item in book list ? what will happend =>  and this represent a prb for us because we save the cache and then we returning as it was ! now for delete for example we can use this
+    ```php
+    # Import this $cachePool with this TagAwareCacheInterface $cachePool as DI
+     $cachePool->invalidateTags(["booksCache"]);
+    ```
+    - In this way we can set the invalide cache of booksCache
+
 ## References & Learning Resources
 
 - https://openclassrooms.com/fr/courses/7709361-construisez-une-api-rest-avec-symfony-1/7795134-gerez-les-erreurs-et-ajoutez-la-validation => Tutorial iam watching
