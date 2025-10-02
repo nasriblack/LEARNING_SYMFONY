@@ -27,18 +27,20 @@ final class BookController extends AbstractController
         BookRepository $bookRepository,
         SerializerInterface $serializer,
         Request $request,
-        TagAwareCacheInterface $cachePool
+        TagAwareCacheInterface $cache
     ): JsonResponse {
+
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 3);
 
         $idCache = "getAllBooks-" . $page . "-" . $limit;
-        $bookList = $cachePool->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit) {
+
+        $jsonBookList = $cache->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit, $serializer) {
             $item->tag("booksCache");
-            return $bookRepository->findAllWithPagination($page, $limit);
+            $bookList = $bookRepository->findAllWithPagination($page, $limit);
+            return $serializer->serialize($bookList, 'json', ['groups' => 'getBooks']);
         });
 
-        $jsonBookList = $serializer->serialize($bookList, 'json', ['groups' => 'getBooks']);
         return new JsonResponse($jsonBookList, Response::HTTP_OK, [], true);
     }
 

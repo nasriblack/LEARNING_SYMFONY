@@ -231,6 +231,23 @@ echo $greeter("Nasereddine");
     ```
     - Here we are making a cache and after we getting the cache if it found of couse !
     - We will return the $bookList of course !
+    - But here we have a **prb** , the result of our relation with authour is getting **null**
+    => **SOLUTION** => we will cache the entier json response ! which have the value and the result of the beginning , so we need to update our BookController and our BookRepository
+    ```php
+    # In Repository ( this is other solution)
+        $query->setFetchMode(Book::class, "author", \Doctrine\ORM\Mapping\ClassMetadata::FETCH_EAGER);
+    ```
+
+    ```php
+    # In controller we replace this code
+     $jsonBookList = $cache->get($idCache, function (ItemInterface $item) use ($bookRepository, $page, $limit, $serializer) {
+            $item->tag("booksCache");
+            $bookList = $bookRepository->findAllWithPagination($page, $limit);
+            return $serializer->serialize($bookList, 'json', ['groups' => 'getBooks']);
+        });
+    ```
+
+    **YOU NEED TO CLEAR THE CACHE**
 
 ## References & Learning Resources
 
