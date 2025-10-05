@@ -292,6 +292,14 @@ echo $greeter("Nasereddine");
      config\packages\nelmio_api_doc.yaml
     ```
 
+- ELIMINIATE SOME ATT THAT U DON'T LIKE !
+    ```php
+  $json_content = $serializer->serialize($products, "json", [
+            ObjectNormalizer::IGNORED_ATTRIBUTES => ["id"]
+        ]);
+    ```
+    - This code will ignore the att id from the json response 
+
 ## References & Learning Resources
 
 - https://openclassrooms.com/fr/courses/7709361-construisez-une-api-rest-avec-symfony-1/7795134-gerez-les-erreurs-et-ajoutez-la-validation => Tutorial iam watching
